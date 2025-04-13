@@ -108,13 +108,31 @@ struct List {
 		if(getSize() == 0) return;
 
 		if(getSize() <= sizeEnd){
-			Node* aux = start;
-			while(aux != NULL){
-				Node* delBefore = aux;
-				aux = aux->next;
-				delete(delBefore);
+			while(start != NULL){
+				Node* aux = start;
+				start = start->next;
+				delete(aux);
 			}
+			start = NULL;
+			end = NULL;
+			size = 0;
 			return;
+		}
+
+		int startDelete = getSize() - sizeEnd;
+		Node* aux = start;
+		Node* deleteBefore;
+
+		for(int i = 0 ; i < getSize() - 1 ; i++){
+			if(i == startDelete - 1){
+				end = aux;
+				end->next = NULL;
+			}
+			deleteBefore = aux;
+			aux = aux->next;
+			if(i > startDelete){
+				delete(deleteBefore);
+			}
 		}
 	}
 
@@ -155,6 +173,9 @@ int main() {
 	// l1.popFront();
 	// l1.insert(1, 2);
 	l1.print();
-	l1.deleteTail(8);
+	l1.deleteTail(3);
+	// l1.pushBack(5);
+	// l1.pushBack(6);
+	l1.print();
 	return 0;
 }

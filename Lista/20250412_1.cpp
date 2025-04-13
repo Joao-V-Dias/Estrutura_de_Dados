@@ -104,6 +104,14 @@ struct List {
 		size--;
 	}
 
+	void addSizeItem(){
+		pushBack(getSize());
+	}
+
+	void addSubListSize(){
+		
+	}
+
 	void deleteTail(int sizeEnd){
 		if(getSize() == 0) return;
 
@@ -119,21 +127,33 @@ struct List {
 			return;
 		}
 
-		int startDelete = getSize() - sizeEnd;
+		int endList = getSize() - sizeEnd;
 		Node* aux = start;
-		Node* deleteBefore;
 
-		for(int i = 0 ; i < getSize() - 1 ; i++){
-			if(i == startDelete - 1){
-				end = aux;
-				end->next = NULL;
-			}
-			deleteBefore = aux;
+		for(int i = 0 ; i < endList - 1 ; i++){
 			aux = aux->next;
-			if(i > startDelete){
-				delete(deleteBefore);
-			}
 		}
+
+		Node* startDelete = aux->next;
+		end = aux;
+		end->next = NULL;
+
+		while(startDelete != NULL){
+			Node* toDelete = startDelete;
+			startDelete = startDelete->next;
+			delete(toDelete);
+			size--;
+		}
+	}
+
+	void deleteSecItem(){
+		if(getSize() <= 1) return;
+
+		Node* secItem = start->next;
+		start->next = secItem->next;
+		delete(secItem);
+		size--;
+		return;
 	}
 
 	void insert(int value, int position){
@@ -169,13 +189,20 @@ int main() {
 	l1.pushFront(8);
 	l1.pushBack(2);
 	l1.pushBack(5);
-	// l1.popBack();
-	// l1.popFront();
-	// l1.insert(1, 2);
+	l1.print();
+	l1.popBack();
+	l1.popFront();
+	l1.print();
+	l1.insert(1, 2);
 	l1.print();
 	l1.deleteTail(3);
-	// l1.pushBack(5);
-	// l1.pushBack(6);
+	l1.print();
+	l1.pushBack(5);
+	l1.pushBack(6);
+	l1.print();
+	l1.deleteSecItem();
+	l1.print();
+	l1.addSizeItem();
 	l1.print();
 	return 0;
 }

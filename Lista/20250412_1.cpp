@@ -16,7 +16,7 @@ struct List {
 	Node* start;
 	Node* end;
 	int size;
-	
+
 	List(){
 		start = NULL;
 		end = NULL;
@@ -108,8 +108,10 @@ struct List {
 		pushBack(getSize());
 	}
 
-	void addSubListSize(){
-		
+	void addSubListSize(sizeList){
+        for(int i = 1 ; i <= sizeList ; i++){
+            pushBack(i);
+        }
 	}
 
 	void deleteTail(int sizeEnd){
@@ -161,15 +163,15 @@ struct List {
 			pushFront(value);
 			return;
 		}
-		
-		if(position >= size){
+
+		if(position >= getSize()){
 			pushBack(value);
 			return;
 		}
 
 		Node* n = new Node(value);
 		size++;
-		
+
 		Node* before = start;
 		for(int i = 0 ; i < position - 1 ; i++){
 			before = before->next;
@@ -177,6 +179,19 @@ struct List {
 
 		n->next = before->next;
 		before->next = n;
+	}
+
+	void insertPenultimate(int value){
+	    if(getSize() <= 1) return;
+
+	    Node* aux = start;
+        while(aux->next != end){
+            aux = aux->next;
+        }
+        Node* n = new Node(value);
+        aux->next = n;
+        n->next = end;
+        size++;
 	}
 };
 

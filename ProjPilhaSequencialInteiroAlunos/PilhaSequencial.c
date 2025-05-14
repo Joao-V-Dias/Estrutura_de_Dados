@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "PilhaSequencial.h" //inclui os Protótipos
+#include "PilhaSequencial.h" //inclui os ProtÃ³tipos
 
-//Definição do tipo Pilha
+//DefiniÃ§Ã£o do tipo Pilha
 struct pilha{
     int topo;
     int dados[MAX];
@@ -21,7 +21,10 @@ void libera_Pilha(Pilha* pi){
 }
 
 int consulta_topo_Pilha(Pilha* pi, int *num){
-   // implementar aqui
+    if(pi == NULL) return 0;
+    if(pilha_vazia(pi)) return 0;
+    *num = pi->dados[pi->topo - 1];
+    return 1;
 }
 
 void insere_Pilha(Pilha* pi, int num){
@@ -30,6 +33,8 @@ void insere_Pilha(Pilha* pi, int num){
 }
 
 int remove_Pilha(Pilha* pi){
+    if(pi == NULL) return 0;
+    if(pi->topo == 0) return 0;
     int elemento;
     elemento = pi->dados[pi->topo];
     pi->topo--;
@@ -37,17 +42,27 @@ int remove_Pilha(Pilha* pi){
 }
 
 int tamanho_Pilha(Pilha* pi){
-    return pi->topo + 1;
+    if(pi == NULL) return 0;
+    return pi->topo;
 }
 
 int pilha_cheia(Pilha* pi){
-    // implementar aqui
+    if(pi == NULL) return -1;
+    if(pi->topo == MAX) return 1;
+    return 0;
 }
 
 int pilha_vazia(Pilha* pi){
-   // implementar aqui
+    if(pi == NULL) return -1;
+    if(pi->topo == 0) return 1;
+    return 0;
 }
 
 void imprime_Pilha(Pilha* pi){
-    // implementar aqui
+    if(pi == NULL) return 0;
+    int i;
+    for(i = pi->topo-1; i >= 0 ; i--){
+        printf("Pos %d: %d\n", i, pi->dados[i]);
+    }
+    printf("---------------------------");
 }

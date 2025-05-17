@@ -10,7 +10,7 @@ typedef struct pilha Pilha;
 
 Pilha* cria_Pilha();
 void libera_Pilha(Pilha* pi);
-int consulta_topo_Pilha(Pilha* pi, struct aluno *al);
+int consulta_topo_Pilha(Pilha* pi, struct aluno *al); // Pesquisar o funcionamento depois
 int insere_Pilha(Pilha* pi, struct aluno al);
 int remove_Pilha(Pilha* pi);
 int tamanho_Pilha(Pilha* pi);

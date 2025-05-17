@@ -12,7 +12,7 @@ Pilha* cria_Pilha(){
     Pilha *p;
    p = (Pilha*) malloc(sizeof(Pilha));
    if(!p)exit(1);
-   p->topo = -1;
+   p->topo = 0;
     return p;
 }
 
